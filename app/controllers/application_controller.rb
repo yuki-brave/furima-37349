@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  berore_action :basic_auth
+  before_action :basic_auth
 
   private
 
