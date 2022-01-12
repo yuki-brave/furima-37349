@@ -6,25 +6,13 @@ class User < ApplicationRecord
 
   validates :nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :birth_day_id, presence: true
 
+  # 半角英数字混合
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze }
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}
-
-  # 全角ひらがな、全角カタカナ、漢字
-  VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]/
-  validates :last_name, :first_name, format: { with: VALID_NAME_REGEX, message: 'は全角にする必要があります'}
+  # お名前(全角)は、全角（漢字・ひらがな・カタカナ）
+  validates :last_name, :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/}
   
-
   # 全角カタカナ
-  VALID_KANA_REGEX = /\A[ァ-ヶー－]+\z/
-  validates :last_name_kana, :first_name_kana, format: { with: VALID_KANA_REGEX, message: 'は全角カタカナにする必要があります'}
-
+  validates :last_name_kana, :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
+  
 end
-# パスワードは、半角英数字混合での入力が必須であることのテストコード
-# FactoryBot.define do
-#   factory :user do
-#     email                   { Faker::Internet.email}
-#     password                { 'abcd1234' }
-#     password_confirmation   { password }
-#   end
-# end
