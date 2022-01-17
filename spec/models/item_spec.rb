@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload('images/タスク着手順序.png')
   end
 
   describe '商品出品' do
@@ -49,8 +48,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'category_idが「---」では出品できない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
       it 'condition_idが空では出品できない' do
         @item.condition_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'condition_idが「---」では出品できない' do
+        @item.condition_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
@@ -59,8 +68,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping cost can't be blank")
       end
+      it 'shipping_cost_idが「---」では出品できない' do
+        @item.shipping_cost_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping cost can't be blank")
+      end
       it 'shipping_prefecture_idが空では出品できない' do
         @item.shipping_prefecture_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping prefecture can't be blank")
+      end
+      it 'shipping_prefecture_idが「---」では出品できない' do
+        @item.shipping_prefecture_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping prefecture can't be blank")
       end
@@ -69,10 +88,20 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping days can't be blank")
       end
+      it 'shipping_days_idが「---」では出品できない' do
+        @item.shipping_days_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping days can't be blank")
+      end
       it 'imageが空では出品できない' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
