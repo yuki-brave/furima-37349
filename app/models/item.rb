@@ -4,6 +4,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
+  has_one :purchase, dependent: :destroy
 
   validates :title, :text, :image, presence: true
   validates :category_id, :condition_id, :shipping_cost_id, :shipping_prefecture_id, :shipping_days_id,
