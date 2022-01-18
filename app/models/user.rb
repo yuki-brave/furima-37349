@@ -12,5 +12,5 @@ class User < ApplicationRecord
   # 全角カタカナ
   validates :last_name_kana, :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
 
-  has_many :items
+  has_many :items, dependent: :destroy
 end
