@@ -12,6 +12,7 @@ class PurchasesController < ApplicationController
       @purchase_destination.save
       redirect_to root_path
     else
+      @item = Item.find(params[:item_id])
       render :new
     end
   end
