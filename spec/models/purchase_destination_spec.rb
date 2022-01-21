@@ -9,6 +9,7 @@ RSpec.describe PurchaseDestination, type: :model do
     @item.id = '1'
     @item.save
     @purchase_destination = FactoryBot.build(:purchase_destination, user_id: @user.id, item_id: @item.id)
+    sleep 0.05
   end
   
   describe '商品購入' do
