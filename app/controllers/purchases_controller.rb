@@ -10,7 +10,7 @@ class PurchasesController < ApplicationController
   def create
     @purchase_destination = PurchaseDestination.new(purchase_params)
     if @purchase_destination.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       pay_item
       @purchase_destination.save
       redirect_to root_path
@@ -22,7 +22,9 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_params
-    params.require(:purchase_destination).permit(:post_code, :shipping_prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id]).merge(token: params[:token])
+    params.require(:purchase_destination).permit(:post_code, :shipping_prefecture_id, :city, :address, :building, :phone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id]
+    ).merge(token: params[:token])
   end
 
   def set_item
@@ -38,10 +40,6 @@ class PurchasesController < ApplicationController
   end
 
   def move_to_index
-    if @item.purchase.present? || @item.user_id == current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.purchase.present? || @item.user_id == current_user.id
   end
-    
-
 end
