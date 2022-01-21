@@ -33,7 +33,7 @@ RSpec.describe PurchaseDestination, type: :model do
         @purchase_destination.valid?
         expect(@purchase_destination.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
-      it 'post_codeが半角のハイフンを含んだ形式では購入できない' do
+      it 'post_codeが半角のハイフンを含んだ形式でなければ購入できない' do
         @purchase_destination.post_code = '1111111'
         @purchase_destination.valid?
         expect(@purchase_destination.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
