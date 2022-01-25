@@ -26,7 +26,7 @@ RSpec.describe PurchaseDestination, type: :model do
       it 'post_codeが空では購入できない' do
         @purchase_destination.post_code = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("郵便番号は不適切です。ハイフン「-」を含めてください")
+        expect(@purchase_destination.errors.full_messages).to include('郵便番号は不適切です。ハイフン「-」を含めてください')
       end
       it 'post_codeが全角数字では購入できない' do
         @purchase_destination.post_code = '１２３-４５６７'
@@ -41,27 +41,27 @@ RSpec.describe PurchaseDestination, type: :model do
       it 'shipping_prefecture_idが空では購入できない' do
         @purchase_destination.shipping_prefecture_id = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("都道府県を選択してください")
+        expect(@purchase_destination.errors.full_messages).to include('都道府県を選択してください')
       end
       it 'shipping_prefecture_idが「---」では購入できない' do
         @purchase_destination.shipping_prefecture_id = '1'
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("都道府県を選択してください")
+        expect(@purchase_destination.errors.full_messages).to include('都道府県を選択してください')
       end
       it 'cityが空では購入できない' do
         @purchase_destination.city = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("市区町村を入力してください")
+        expect(@purchase_destination.errors.full_messages).to include('市区町村を入力してください')
       end
       it 'addressが空では購入できない' do
         @purchase_destination.address = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("番地を入力してください")
+        expect(@purchase_destination.errors.full_messages).to include('番地を入力してください')
       end
       it 'phone_numberが空では購入できない' do
         @purchase_destination.phone_number = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("電話番号を入力してください")
+        expect(@purchase_destination.errors.full_messages).to include('電話番号を入力してください')
       end
       it 'phone_numberが全角数字では購入できない' do
         @purchase_destination.phone_number = '１２３４５６７８９０１'
@@ -81,18 +81,17 @@ RSpec.describe PurchaseDestination, type: :model do
       it 'tokenが空では購入できない' do
         @purchase_destination.token = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("クレジットカード情報を入力してください")
+        expect(@purchase_destination.errors.full_messages).to include('クレジットカード情報を入力してください')
       end
       it 'userが紐付いてなければ購入できない' do
         @purchase_destination.user_id = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("Userを入力してください")
+        expect(@purchase_destination.errors.full_messages).to include('Userを入力してください')
       end
       it 'itemが紐付いてなければ購入できない' do
         @purchase_destination.item_id = ''
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include("Itemを入力してください")
-
+        expect(@purchase_destination.errors.full_messages).to include('Itemを入力してください')
       end
     end
   end

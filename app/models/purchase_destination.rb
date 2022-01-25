@@ -7,7 +7,7 @@ class PurchaseDestination
     validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'は不適切です。ハイフン「-」を含めてください' }
     validates :phone_number, format: { with: /\A[0-9]{10,11}\z/, message: 'を正しく入力してください' }
   end
-  validates :shipping_prefecture_id, numericality: { other_than: 1, message: "を選択してください" }
+  validates :shipping_prefecture_id, numericality: { other_than: 1, message: 'を選択してください' }
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
