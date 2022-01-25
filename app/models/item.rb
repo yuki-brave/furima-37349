@@ -6,11 +6,11 @@ class Item < ApplicationRecord
   has_one_attached :image
   has_one :purchase, dependent: :destroy
 
+  with_options presence: true do
   validates :title, :text, :image, presence: true
-  validates :category_id, :condition_id, :shipping_cost_id, :shipping_prefecture_id, :shipping_days_id,
-            numericality: { other_than: 1, message: "can't be blank" }
   validates :price,
-            numericality: { presence: true, only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-  # validates :price, numericality: {presence: true, only_integer: true, in: 300..9999999 }
-  # , format:  {with: /\A[0-9]+\z/ } # 全て数値（半角）
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'は設定金額内の値を入力してください' }
+  end
+  validates :category_id, :condition_id, :shipping_cost_id, :shipping_prefecture_id, :shipping_days_id,
+  numericality: { other_than: 1, message: 'を選択してください' }
 end
